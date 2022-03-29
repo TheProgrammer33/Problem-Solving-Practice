@@ -1,10 +1,10 @@
 # Dylan Bryant
-import mazeSolver, CoinGameProbability
+import CoinGameProbability
 
 
 def main():
     print("Starting...")
-    mazeSolver.mazeSolver()
+    print(CoinGameProbability.coinGame())
 
 main()
 

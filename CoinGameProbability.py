@@ -15,15 +15,24 @@ def coinGame():
     score[1] = int(score[1])
     maxGamesLeft = 19 - (score[0] + score[1])
     possibilities = pow(2, maxGamesLeft)
-    game = "0"*maxGamesLeft
-    games = [game]
+    winsLossCount = [0, 0]
     for i in range(possibilities):
-        game[0] = 1 if (True) else (game[0] = 0)
-        
+        possibleOutcome = str(bin(i))[2:]
+        game = "0"*(maxGamesLeft - len(possibleOutcome)) + possibleOutcome
+        if (isWin(score.copy(), game)):
+            winsLossCount[0] += 1
+        else:
+            winsLossCount[1] += 1
+    
+    probability = round(winsLossCount[0]/possibilities * 100, 6)
+    return probability
 
 def isWin(score, game):
-    for result in range(game):
-        if 
+    for result in range(len(game)):
+        if game[result] == "1":
+            score[0] += 1
+        else:
+            score[1] += 1
         if score[0] == 10:
             return True
         elif score[1] == 10:
