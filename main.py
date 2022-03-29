@@ -1,10 +1,10 @@
 # Dylan Bryant
-import CoinGameProbability
+import Blocks
 
 
 def main():
     print("Starting...")
-    print(CoinGameProbability.coinGame())
+    print(Blocks.blocks())
 
 main()
 
