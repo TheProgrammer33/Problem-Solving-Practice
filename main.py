@@ -1,10 +1,10 @@
 # Dylan Bryant
-import WireCrossing
+import pancake
 
 
 def main():
     print("Starting...")
-    WireCrossing.wireCrossing()
+    pancake.pancakeProblem()
 
 main()
 
