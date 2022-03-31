@@ -1,10 +1,10 @@
 # Dylan Bryant
-import Blocks
+import WireCrossing
 
 
 def main():
     print("Starting...")
-    print(Blocks.blocks())
+    WireCrossing.wireCrossing()
 
 main()
 
