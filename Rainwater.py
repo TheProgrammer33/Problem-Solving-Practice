@@ -1,10 +1,12 @@
 
 
 def capturing_rainwater(heights):
+  if len(heights) < 3:
+    return 0
   previousMax = getFirstMax(heights)
   waterBucketTotal = 0
   for i in range(previousMax[1], len(heights[1:])):
-    nextMax = findNextMax(heights[i:])
+    nextMax = findNextMax(heights[i:], previousMax)
     try:
       nextMax[1] = heights[i:].index(nextMax[0]) + i
     except:
@@ -17,11 +19,13 @@ def capturing_rainwater(heights):
     
   return waterBucketTotal
 
-def findNextMax(arr):
+def findNextMax(arr, prev):
   max = 0
   for a in arr:
     if a > max:
       max = a
+    if max > prev[0]:
+      return [max, 0]
   return [max, 0]
 
 def getMin(a, b):
@@ -43,3 +47,4 @@ def getFirstMax(arr):
     if (a < previous):
       return [previous, arr.index(previous)]
     previous = a
+  return [previous, arr.index(previous)]
