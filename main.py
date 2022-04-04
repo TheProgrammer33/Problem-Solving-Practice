@@ -1,10 +1,10 @@
 # Dylan Bryant
-import Blocks
+import Rainwater
 
 
 def main():
     print("Starting...")
-    print(Blocks.blocks())
+    print(Rainwater.capturing_rainwater([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]))
 
 main()
 
