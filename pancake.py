@@ -6,11 +6,11 @@ To flip a pancake you find a pancake and flip everything above that pancake.
 Example data:
 [[1, 0], [7, 0],  [9, 1],  [10, 0],  [6, 1],  [4, 1],  [8, 0],  [3, 0],  [5, 1],  [2, 1]]
 """
+
 def pancakeProblem():
     data = randomPancakeDataGenerator()
     print(data)
-    print(sortPancakes(data))
-    print(data)
+    print(pancakeSort(data))
 
 def randomPancakeDataGenerator():
     import random
@@ -26,56 +26,35 @@ def randomPancakeDataGenerator():
         data[index] = [i, burnedSideUp]
     return data
 
-def flipPancakes(allPancakes, numOfPancakes):
-    stack = allPancakes[:numOfPancakes]
-    flippedStack = []
-    for pancake in stack:
-        p = 0 if pancake[1] else 1
-        flippedStack.insert(0, [pancake[0] , p])
-    allPancakes[:numOfPancakes] = flippedStack
-    return allPancakes
+def pancakeSort(arr):
+    numberOfFlips = 0
+    for i in range(len(arr)):
+        newArray = arr[:len(arr)-(numberOfFlips)]
+        largest = findLargest(newArray)
+        arr = flip(arr, getPancakePosition(largest, arr))
+        if (not arr[0][1]):
+            arr = flip(arr, 0)
+        arr = flip(arr, len(arr)-(numberOfFlips+1))
+        numberOfFlips += 1
+    return arr
 
-def sortPancakes(pancakeStack):
-    bottomPosition = len(pancakeStack)-1
-    previousLargestIndex = -1
-    while (not stackChecker(pancakeStack)):
-        index = findNextLargestPancake(pancakeStack, previousLargestIndex)
-        pancakeStack = flipPancakes(pancakeStack, index+1)
-        if (not pancakeStack[0][1]):
-            pancakeStack = flipPancakes(pancakeStack, 1)
-        pancakeStack = flipPancakes(pancakeStack, bottomPosition+1)        
+def findLargest(arr):
+    largest = 0
+    for n in arr:
+        if n[0] > largest:
+            largest = n[0]
+    return largest
 
-        previousLargestIndex = index
-        bottomPosition -= 1
-    return pancakeStack
+def flip(arr, position):
+    newArray = []
+    for a in range(position, -1, -1):
+        arr[a][1] = 0 if arr[a][1] else 1
+        newArray.append(arr[a])
+    for a in range(position+1, len(arr)):
+        newArray.append(arr[a])
+    return newArray
 
-def findNextLargestPancake(stack, previousLargest):
-    largestPancakeIndex = (len(stack)-1)*-1
-    numbers = []
-    for i in stack:
-        numbers.append(i[0])
-    
-
-    for pancake in range(len(stack)):
-        if stack[pancake][0] > stack[largestPancakeIndex][0] and stack[pancake][0] < stack[previousLargest][0]:
-            largestPancakeIndex = pancake
-    if (largestPancakeIndex < 0):
-        # value_if_true if condition else value_if_false
-        largestPancakeIndex = previousLargest if previousLargest != -1 else len(stack)-1
-    return largestPancakeIndex
-
-# def findOutOfPlace(stack):
-#     for pancake in reversed(stack):
-#         if 
-
-# def isLargestInStack(stack, ):
-
-
-def stackChecker(pancakes):
-    for p in range(len(pancakes)-2):
-        if pancakes[p][0] > pancakes[p+1][0]:
-            return False
-        if pancakes[p][1]:
-            return False
-    return True
-
+def getPancakePosition(largest, arr):
+    for a in arr:
+        if (a[0] == largest):
+            return arr.index(a)
