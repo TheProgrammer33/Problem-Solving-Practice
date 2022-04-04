@@ -1,10 +1,10 @@
 # Dylan Bryant
-import Rainwater
+import StockProfit
 
 
 def main():
     print("Starting...")
-    print(Rainwater.capturing_rainwater([2, 0, 3, 0, 2, 0, 4]))
+    print(StockProfit.max_profit_days([17, 11, 60, 25, 50, 75, 31, 120]))
 
 main()
 
