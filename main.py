@@ -1,10 +1,9 @@
 # Dylan Bryant
-import StockProfit
-
+import SemiPrimes
 
 def main():
     print("Starting...")
-    print(StockProfit.max_profit_days([17, 11, 60, 25, 50, 75, 31, 120]))
+    print(SemiPrimes.semi_prime_count(10))
 
 main()
 
